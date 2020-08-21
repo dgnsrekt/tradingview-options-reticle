@@ -12,7 +12,7 @@ if (syminfo.ticker == "DNKN")
 
 
 bgcolor(PROCESS_DATE and OFFSET > 0  ? color.red : na, offset=OFFSET, transp=50)
-plot(75.0, offset=OFFSET - 1, color=color.red)
+plot(75.0, offset=OFFSET * OFFSET, color=color.red, linewidth=15, transp=50)
 
 
 line.new(x1=0, y1=75, x2=0, y2=75, extend=extend.both)
