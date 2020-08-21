@@ -1,0 +1,46 @@
+//@version=4
+study("vline() Function for Pine Script v4.0+", overlay=true)
+
+var OFFSET = 0
+var STRIKE = 0.0
+
+PROCESS_DATE = year == 2020 and month == 8 and dayofmonth == 19
+
+if (syminfo.ticker == "DNKN")
+    OFFSET:=21
+    STRIKE:=75.0
+
+
+bgcolor(PROCESS_DATE and OFFSET > 0  ? color.red : na, offset=OFFSET, transp=50)
+plot(75.0, offset=OFFSET - 1, color=color.red)
+
+
+line.new(x1=0, y1=75, x2=0, y2=75, extend=extend.both)
+
+    // Extend the line in both directions
+    //line.set_extend(id=myLine, extend=extend.both)
+
+//plot(myLine)
+//hline(31, color=color.red, linestyle=hline.style_dashed, linewidth=1)
+
+
+
+
+//showLine   = input(defval = true, title = "Show Method Line by midtownsk8rguy", type = input.bool)
+//vline(BarIndex, Color, LineStyle, LineWidth) => // Verticle Line Function, ≈50-54 lines maximum allowable per indicator
+    // return = line.new(BarIndex,   0.0, BarIndex,     100.0, xloc.bar_index, extend.both, Color, LineStyle, LineWidth) // Suitable for study(overlay=false) and RSI, Stochastic, etc...
+    // return = line.new(BarIndex,  -1.0, BarIndex,       1.0, xloc.bar_index, extend.both, Color, LineStyle, LineWidth) // Suitable for study(overlay=false) and +/-1.0 oscillators
+//    return = line.new(BarIndex, low - tr, BarIndex, high + tr, xloc.bar_index, extend.both, Color, LineStyle, LineWidth) // Suitable for study(overlay=true)
+
+//if(PROCESS_DATE) // Generically plots a line every 10 bars
+//    vline(bar_index, #FF8000ff, line.style_solid, 1) // Variable assignment not required
+
+
+
+//bgcolor((time >= date_stamp and time <= date_stamp) ? color.silver : na)
+
+//vline(BarIndex, Color, LineStyle, LineWidth) => // Verticle Line Function, ≈50-54 lines maximum allowable per indicator
+//    return = line.new(BarIndex, low - tr, BarIndex, high + tr, xloc.bar_index, extend.both, Color, LineStyle, LineWidth) // Suitable for study(overlay=true)
+
+//if(time == date_stamp) // Generically plots a line every 10 bars
+//    vline(bar_index, #FF8000ff, line.style_dashed, 1) // Variable assignment not required
