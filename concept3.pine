@@ -2,3 +2,6 @@ study("vline() Function for Pine Script v4.0+", overlay=true)
 days = 10
 if barstate.islast
     myLine = line.new(x1=time + (86400000 * days), y1=0, x2=time + (86400000 * days), y2=100, xloc=xloc.bar_time, extend=extend.both)
+
+if barstate.islast
+    myLine = line.new(x1=0, y1=75, x2=1, y2=75, xloc=xloc.bar_index, extend=extend.both)
