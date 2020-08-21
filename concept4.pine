@@ -25,3 +25,6 @@ label.set_textcolor(l, textcolor = ABOVE_STRIKE ? color.green : color.red)
 label.set_text(l, text=ABOVE_STRIKE ? "ITM" : "OTM")
 label.set_size(l, size.huge)
 label.set_textalign(l, text.align_left)
+
+
+//https://www.tradingview.com/script/5Z438Ndu-Crypto-Prices-InfoPanel-V2/
