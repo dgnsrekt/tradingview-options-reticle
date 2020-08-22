@@ -1,0 +1,75 @@
+//@version=4
+study("vline() Function for Pine Script v4.0+", overlay=true)
+
+var Y = 2020
+var M = 09
+var D = 21
+ // most common strike.
+var PRICE = 0.0
+var SHOW = false
+var SHOW_FILL = false
+
+var flipped = close[0] != abs(close)
+
+if syminfo.ticker == "DNKN"
+    //Y := timestamp(2020, 9, 18, 0, 0, 0)
+    M := 09
+    D := 18
+
+    PRICE := 65.0
+else if syminfo.ticker == "WMT"
+    PRICE := 135.0
+    //DAY := timestamp(2020, 9, 25, 0, 0, 0)
+    M := 9
+    D := 25
+else if syminfo.ticker == "UBER"
+    PRICE := 32.0
+else if syminfo.ticker == "USO"
+    PRICE := 31.0
+else if syminfo.ticker == "QD"
+    PRICE := 2.00
+
+if (PRICE > 0)
+    SHOW := true
+
+DAY = timestamp(Y, M, D, 0, 0, 0)
+
+STYLE = line.style_dashed
+ABOVE_STRIKE = close[0] > PRICE
+BELOW_STRIKE = close[0] < PRICE
+COLOR = BELOW_STRIKE ? color.new(color.red, 0) : color.new(color.green, 0)
+
+if SHOW
+    line.new(x1=bar_index[0], y1=PRICE, x2=bar_index[1], y2=PRICE, xloc=xloc.bar_index, extend=extend.both, style=STYLE, color=COLOR)
+    line.new(x1=DAY, y1=lowest(low, 60), x2=DAY, y2=highest(high, 60), xloc=xloc.bar_time, extend=extend.both, style=STYLE, color=COLOR)
+
+a = plot(PRICE, color= BELOW_STRIKE and SHOW and SHOW_FILL ? color.new(color.red, 100) : color.new(color.green, 100))
+b = plot(ohlc4, color= BELOW_STRIKE and SHOW and SHOW_FILL ? color.new(color.red, 100) : color.new(color.green, 100))
+fill(a, b, color = ABOVE_STRIKE and SHOW and SHOW_FILL ? color.green : SHOW and SHOW_FILL ? color.red : na)
+
+
+
+
+var label Label = na
+
+label.delete(Label)
+
+lapos_x = DAY + round(change(time)*50)
+lapos_y = PRICE //+ (0.15 * highest(20))
+
+var label_text = ""
+
+MILLISECONDS_IN_A_DAY = 86400000
+
+label_color = ABOVE_STRIKE ? color.green : color.red
+label_text := syminfo.description + "\n"
+label_text := label_text + tostring(round((DAY - time) / MILLISECONDS_IN_A_DAY)) + " DAYS TIL " + tostring(M) + "/" + tostring(D) + " EXPIRATION\n"
+label_text := label_text + "STRIKE PRICE: $" + tostring(PRICE) + "\n"
+label_text := label_text + (ABOVE_STRIKE ? "$" + tostring(close - PRICE) + " IN THE MONEY": "$" + tostring(PRICE - close) + " OUT OF THE MONEY")
+label_text := label_text + "\n" + (flipped ? "PUT OPTION" : "CALL OPTION")
+
+if SHOW
+    Label := label.new(lapos_x, lapos_y, label_text,  yloc=yloc.price, xloc=xloc.bar_time, style=label.style_none, textcolor=label_color, size=size.huge)
+
+
+//if (BELOW_STRIKE)
