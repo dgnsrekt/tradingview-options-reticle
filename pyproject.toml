@@ -10,6 +10,7 @@ python = "^3.8"
 yfinance = "^0.1.54"
 pendulum = "^2.1.2"
 lxml = "^4.5.2"
+bullet = "^2.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest-watch = "^4.2.0"
