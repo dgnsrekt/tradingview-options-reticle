@@ -11,6 +11,12 @@ yfinance = "^0.1.54"
 pendulum = "^2.1.2"
 lxml = "^4.5.2"
 bullet = "^2.2.0"
+jinja2 = "^2.11.2"
+python-decouple = "^3.3"
+pydantic = "^1.6.1"
+enlighten = "^1.6.1"
+html5lib = "^1.1"
+beautifulsoup4 = "^4.9.1"
 
 [tool.poetry.dev-dependencies]
 pytest-watch = "^4.2.0"

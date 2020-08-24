@@ -1,0 +1,9 @@
+var float strike_price = na
+var has_options = false
+
+show_fill = input(title="Show fill", type=input.bool, defval=false)
+// may move show_fill to fill section
+
+//var chart_flipped = close[0] != abs(close[0]) will be a conditional which adds this
+
+plot(close)

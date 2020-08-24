@@ -1,0 +1,6 @@
+//@version=4
+
+TITLE = "{{ title }}"
+SHORT_TITLE = "{{ short_title }}"
+
+study(title=TITLE, shorttitle=SHORT_TITLE, overlay=true)
