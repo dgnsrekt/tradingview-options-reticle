@@ -2,7 +2,12 @@ from pathlib import Path
 from pprint import pprint
 
 from options_reticle.ticker import TickerData
-from options_reticle.watchlist_parser import parse_watchlist, filter_watchlist_by_exchange
+from options_reticle.watchlist_parser import (
+    parse_watchlist,
+    filter_watchlist_by_exchange,
+    get_last_price_data,
+    update_tickers_with_last_price,
+)
 from typing import List, Tuple
 from enum import IntEnum
 
@@ -14,6 +19,7 @@ import enlighten
 ACCEPTABLE_EXCHANGES = ["BATS", "OTC", "NYSE", "NASDAQ", "AMEX", "CBOE"]
 SELECTED_EXCHANGES = ["NYSE", "NASDAQ", "CBOE"]
 
+watchlist_path = Path("watchlist_mini.txt")
 watchlist_path = Path("watchlist.txt")
 watchlist = parse_watchlist(watchlist_path)
 
@@ -107,44 +113,47 @@ def get_put_strike(put_dataframe, max_depth):
 import yfinance as yahoo_client
 
 
-def get_options_data(symbol, depth_otm=1):
-    client = yahoo_client.Ticker(symbol)
-    price = None
+def get_options_data(ticker: TickerData, max_std_otm=1):
+    client = yahoo_client.Ticker(ticker.symbol)
 
     try:
-        info = client.info
-        price = info["regularMarketPrice"]
-    except (IndexError, KeyError):
-        pass
-
-    try:
-        data = client.options
+        option_dates = client.options
     except IndexError:
         return None
 
-    dates = filter_option_expiration_dates(data, SELECTED_MINIMUM_DAYS, PROCESS_START_DATE)
-    expiration_date = dates[0]
+    if len(option_dates) < 1:
+        return None
+
+    option_dates = filter_option_expiration_dates(
+        option_dates, SELECTED_MINIMUM_DAYS, PROCESS_START_DATE
+    )
+    expiration_date = option_dates[0]
 
     option_dataframe = client.option_chain(str(expiration_date))
     call_data, put_data = clean_option_dataframe(option_dataframe)
 
-    if price:
-        call_price = get_call_strike_from_price(call_data, price)
-        put_price = get_put_strike_from_price(put_data, price)
-
+    if ticker.last_price is not None:
+        call_price = get_call_strike_from_price(call_data, ticker.last_price)
+        put_price = get_put_strike_from_price(put_data, ticker.last_price)
     else:
-        call_price = get_call_strike(call_data, max_depth=depth_otm)
-        put_price = get_put_strike(put_data, max_depth=depth_otm)
+        print(ticker.symbol, "using std")
+        call_price = get_call_strike(call_data, max_depth=max_std_otm)
+        put_price = get_put_strike(put_data, max_depth=max_std_otm)
 
     return expiration_date, call_price, put_price
 
 
-pbar = enlighten.Counter(total=len(watchlist), unit="symbols")
-for ticker in watchlist:
-    pbar.desc = ticker.symbol
-    option_data = get_options_data(ticker.symbol)
-    if option_data:
-        ticker.update_options_data(*option_data)
-    pbar.update()
+ticker_data = get_last_price_data(watchlist)
+watchlist = update_tickers_with_last_price(watchlist, ticker_data)
 
 pprint(watchlist)
+#
+# pbar = enlighten.Counter(total=len(watchlist), unit="symbols")
+# for ticker in watchlist:
+#     pbar.desc = ticker.symbol
+#     option_data = get_options_data(ticker)
+#     if option_data:
+#         ticker.update_options_data(*option_data)
+#     pbar.update()
+#
+# pprint(watchlist)
