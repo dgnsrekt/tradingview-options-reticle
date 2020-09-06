@@ -11,7 +11,7 @@ label_y_position = strike_price
 
 dollars_itm = above_strike ? close - strike_price : strike_price - close
 
-emoji = above_strike ? emoji_itm_data(dollars_itm) : emoji_otm_data(dollars_itm)
+emoji = above_strike ? get_itm_emoji(dollars_itm) : get_otm_emoji(dollars_itm)
 
 var _text = ""
 
@@ -23,10 +23,9 @@ _text := _text + emoji + " " + (above_strike? "$" + tostring(dollars_itm) + " IN
 _text := _text + (chart_flipped ? " PUT OPTION " : " CALL OPTION ")
 
 var tooltip_text = ""
-tooltip_text := "Script Location:" + "\n"
-tooltip_text := tooltip_text + "github.com/dgnsrekt/tradingview-options-reticle"
+tooltip_text := "github.com/dgnsrekt/tradingview-options-reticle"
 
-// add version and process date / process information / put options avaliable /
+// add version and process date / process information / avaliable option types /
 // delta information
 // put option instructions if quick flip put action vs manual input put dial
 

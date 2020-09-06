@@ -80,3 +80,14 @@ class Watchlist(Base):
     def create_return_data(self):
         for ticker in self.watchlist:
             ticker.create_return_data()  # add a most common datetime
+
+    def __len__(self):
+        return len(self.watchlist)
+
+    def join_tickers(self):
+        return " ".join([ticker.symbol for ticker in self.watchlist])
+
+    def describe(self):
+        head = self.watchlist[0].symbol
+        tail = self.watchlist[-1].symbol
+        return f"{head} -> {tail}"

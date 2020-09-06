@@ -6,6 +6,16 @@ from options_reticle.emoji import create_emojis
 from pprint import pprint
 
 
+watchlist_output_path = PROJECT_ROOT_PATH / "watchlist.json"
+assert watchlist_output_path.exists()  # check and raise
+watchlist = Watchlist.parse_file(watchlist_output_path)
+watchlist.watchlist = watchlist.watchlist[:200]
+watchlist.create_return_data()
+watchlist_description = watchlist.describe()
+
+print("// watchlist lenght ==", len(watchlist))
+
+
 # TODO: add quick flip action as a builder option
 file_loader = FileSystemLoader("templates")
 environment = Environment(loader=file_loader)
@@ -13,10 +23,11 @@ environment = Environment(loader=file_loader)
 head = environment.get_template("head.pine")
 
 TITLE = "FOMO DRIVEN DEVELOPMENT OPTIONS RETICLE"
-SHORT_TITLE = "[FDD] OPTIONS RETICLE"
+SHORT_TITLE = f"[FDD] OPTIONS RETICLE [{watchlist_description}]"
+MAX_BARS = 90
 
-head_arguments = {"title": TITLE, "short_title": SHORT_TITLE}
-output = head.render(**head_arguments)
+# head_arguments = {"title": TITLE, "short_title": SHORT_TITLE, "max_bars": MAX_BARS}
+output = head.render(title=TITLE, short_title=SHORT_TITLE, max_bars=MAX_BARS)
 
 print()
 print(output)
@@ -27,20 +38,13 @@ output = vars.render()
 
 print(output)
 print()
-
-watchlist_output_path = PROJECT_ROOT_PATH / "watchlist.json"
-assert watchlist_output_path.exists()  # check and raise
-watchlist = Watchlist.parse_file(watchlist_output_path)
-# watchlist.watchlist = watchlist.watchlist[:225]
-
 option_function = environment.get_template("option_function.pine")
-watchlist.create_return_data()
 
 output = option_function.render(watchlist.dict())
 print(output)
 
 reticle = environment.get_template("reticle.pine")
-output = reticle.render()
+output = reticle.render(length=MAX_BARS)
 print(output)
 
 fill = environment.get_template("fill.pine")
