@@ -94,3 +94,4 @@ ENV/
 # dgnsrekt custom
 pytest.ini
 temp-plot.html
+watchlist.json

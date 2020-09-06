@@ -110,6 +110,14 @@ blessed = ">=1.17.7"
 
 [[package]]
 category = "main"
+description = "Get the currently executing AST node of a frame, and other information"
+name = "executing"
+optional = false
+python-versions = "*"
+version = "0.5.2"
+
+[[package]]
+category = "main"
 description = "HTML parser based on the WHATWG HTML specification"
 name = "html5lib"
 optional = false
@@ -430,6 +438,17 @@ secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "pyOpenSSL (>=0
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [[package]]
+category = "main"
+description = "Retrieving variable names of function or class calls."
+name = "varname"
+optional = false
+python-versions = ">=3.6,<4.0"
+version = "0.4.0"
+
+[package.dependencies]
+executing = "*"
+
+[[package]]
 category = "dev"
 description = "Filesystem events monitoring"
 name = "watchdog"
@@ -474,7 +493,8 @@ pandas = ">=0.24"
 requests = ">=2.20"
 
 [metadata]
-content-hash = "53a0fa6a5039e4723829b069697cd145ce61e565c50ba7771d1bc541320c43dd"
+content-hash = "90dd271004dc53b82272f586374926bc87f2eeef690c3872a41d4418c18616fa"
+lock-version = "1.0"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -521,6 +541,9 @@ docopt = [
 enlighten = [
     {file = "enlighten-1.6.1-py2.py3-none-any.whl", hash = "sha256:f4fbd132f7ebcdac95c1fe7f0f9b968ed16af82eee83934b17aa8bbbcd3b5940"},
     {file = "enlighten-1.6.1.tar.gz", hash = "sha256:03f01f594e031de947741ae5d415319b3510e5a54fcff08d0721b5d02d4caafa"},
+]
+executing = [
+    {file = "executing-0.5.2-py3-none-any.whl", hash = "sha256:3325b1d83f77d73fd0823f1fc667fccb46e30377f01f17348689d185b59128f4"},
 ]
 html5lib = [
     {file = "html5lib-1.1-py2.py3-none-any.whl", hash = "sha256:0d78f8fde1c230e99fe37986a60526d7049ed4bf8a9fadbad5f00e22e58e041d"},
@@ -765,6 +788,10 @@ toml = [
 urllib3 = [
     {file = "urllib3-1.25.10-py2.py3-none-any.whl", hash = "sha256:e7983572181f5e1522d9c98453462384ee92a0be7fac5f1413a1e35c56cc0461"},
     {file = "urllib3-1.25.10.tar.gz", hash = "sha256:91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"},
+]
+varname = [
+    {file = "varname-0.4.0-py3-none-any.whl", hash = "sha256:1d274eee505059ad9ba5fa383827b1da817d634dea072c6e7cf9099abbc1abd5"},
+    {file = "varname-0.4.0.tar.gz", hash = "sha256:7574804b831b1b9943ab677417a104dc80bca1fb00cb2be1d686d70a1ff9299c"},
 ]
 watchdog = [
     {file = "watchdog-0.10.3.tar.gz", hash = "sha256:4214e1379d128b0588021880ccaf40317ee156d4603ac388b9adcf29165e0c04"},

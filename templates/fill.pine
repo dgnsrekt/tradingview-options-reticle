@@ -1,0 +1,4 @@
+
+strike_plot = plot(strike_price, color=below_strike and show_indicator and show_fill ? color.new(color.red, 100) : color.new(color.green, 100), editable=false, display=display.none)
+close_plot = plot(close, color=below_strike and show_indicator and show_fill ? color.new(color.red, 100) : color.new(color.green, 100), editable=false, display=display.none)
+fill(strike_plot, close_plot, color = below_strike and show_indicator and show_fill ? color.red: show_indicator and show_fill ? color.green : na, editable=false)

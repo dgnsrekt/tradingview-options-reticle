@@ -1,0 +1,49 @@
+
+[_year, _month, _day, call_price, put_price] = option_data()
+
+expiration_date = timestamp(_year, _month, _day, 0, 0, 0)
+
+check_options(call, put) =>
+    if call > 0
+        true
+    else if put > 0
+        true
+    else
+        false
+
+
+get_strike_price(call, put) =>
+    if chart_flipped == false
+        call
+    else if chart_flipped == true
+        put
+    else
+        na
+
+has_options := check_options(call_price, put_price)
+
+if (has_options == true)
+    strike_price := get_strike_price(call_price, put_price)
+
+if (strike_price > 0)
+    show_indicator := true
+
+if chart_flipped
+    strike_price := -strike_price
+
+
+above_strike = close[0] > strike_price
+below_strike = close[0] < strike_price
+
+position_color = above_strike ? color.new(color.green, 0) : color.new(color.red, 0)
+
+if show_indicator
+    LINE_STYLE = line.style_dashed
+    EXTEND_STYLE = extend.both
+
+    line.new(x1=bar_index[0], y1=strike_price, x2=bar_index[1], y2=strike_price, xloc=xloc.bar_index, extend=EXTEND_STYLE, style=LINE_STYLE, color=position_color)
+
+    low_dial=lowest(low, 60)
+    high_dial=highest(high, 60)
+
+    line.new(x1=expiration_date, y1=low_dial, x2=expiration_date, y2=high_dial, xloc=xloc.bar_time, extend=EXTEND_STYLE, style=LINE_STYLE, color=position_color)

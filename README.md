@@ -1,5 +1,5 @@
 [FDD] Options Reticle
 
-Instant choice of reticle for every market condition from open to close.
+Instant choice of reticle for every market condition.
 
-The new Options Series Reticles from [FDD] cater to traders and gamblers reaching out to longer distant expiration for precise option strike placement.
+Fomo Driven Development Options Series Reticle cater to traders and gamblers around the world reaching out for long distant expiration and precise option strike placement.

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tradingview_option_targets"
-version = "0.1.0"
+version = "0.2.0"
 description = "Generate option targets from tradingview watchlists."
 authors = ["dgnsrekt <dgnsrekt@pm.me>"]
 license = "MIT"
@@ -17,6 +17,7 @@ pydantic = "^1.6.1"
 enlighten = "^1.6.1"
 html5lib = "^1.1"
 beautifulsoup4 = "^4.9.1"
+varname = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest-watch = "^4.2.0"

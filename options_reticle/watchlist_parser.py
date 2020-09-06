@@ -36,7 +36,7 @@ def get_last_price_data(watchlist: List[TickerData]):
 
 def update_tickers_with_last_price(watchlist: List[TickerData], ticker_data: DataFrame):
     for ticker in watchlist:
-        raw = ticker_data[ticker.symbol]["Close"][0]
+        raw = ticker_data[ticker.symbol]["Close"].get(0)
         price = float(round(raw, ndigits=2))
 
         if price > 0:

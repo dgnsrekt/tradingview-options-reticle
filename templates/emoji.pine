@@ -1,0 +1,16 @@
+
+emoji_itm_data(price)=>
+{% for ticker in itm%}{% if loop.index == 1 %}    if price < 0.5
+        "{{ticker[1]}}"
+{% else %}    else if price <= {{ticker[0]}}
+        "{{ticker[1]}}"
+{% endif %}{% endfor %}    else
+        "{{itm[-1][-1]}}"
+
+emoji_otm_data(price)=>
+{% for ticker in otm%}{% if loop.index == 1 %}    if price < 0.5
+        "{{ticker[1]}}"
+{% else %}    else if price <= {{ticker[0]}}
+        "{{ticker[1]}}"
+{% endif %}{% endfor %}    else
+        "{{otm[-1][-1]}}"
