@@ -1,4 +1,4 @@
-[FDD] Options Reticle
+# [FDD] Options Reticle
 
 Instant choice of reticle for every market condition.
 
