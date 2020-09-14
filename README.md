@@ -11,4 +11,4 @@ This style of reticle is not visual until you flip the chart. The advantage of t
 
 Activate QAP mode by changing the appending a 0- to the charts symbol. If nothing appears that means there is no put option data for that symbol.
 
-![alt text](images/FDD Reticle finished copy.jpg)
+![alt text](images/img.jpg)
