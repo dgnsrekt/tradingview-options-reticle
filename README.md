@@ -1,4 +1,4 @@
-# [FDD] Options Reticle
+# [FDD] **Options Reticle**
 
 
 ![alt text](images/options_reticle_v1.png)
