@@ -1,9 +1,7 @@
 # [FDD] **Options Reticle**
 
 
-![alt text](images/options_reticle_v1.png)
-
-## Instant choice of reticle for every market condition.
+![alt text](images/options_reticle_v3.png)
 
 Fomo Driven Development Options Series Reticle cater to traders and gamblers around the world reaching out for long distant expiration and near ITM strike placement.
 
