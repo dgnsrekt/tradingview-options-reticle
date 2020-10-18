@@ -5,6 +5,7 @@ from options_reticle.ticker import Watchlist
 from options_reticle.emoji import create_emojis
 from pprint import pprint
 
+# QUICK_ACTION_PUT_MODE = True
 
 watchlist_output_path = PROJECT_ROOT_PATH / "watchlist.json"
 assert watchlist_output_path.exists()  # check and raise

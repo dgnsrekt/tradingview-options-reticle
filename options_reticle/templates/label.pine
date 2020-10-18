@@ -1,3 +1,4 @@
+
 var label Label = na
 
 DAY_IN_MILLISECONDS = 86400000
@@ -23,11 +24,10 @@ _text := _text + emoji + " " + (above_strike? "$" + tostring(dollars_itm) + " IN
 _text := _text + (chart_flipped ? " PUT OPTION " : " CALL OPTION ")
 
 var tooltip_text = ""
-tooltip_text := "github.com/dgnsrekt/tradingview-options-reticle"
-
-// add version and process date / process information / avaliable option types /
-// delta information
-// put option instructions if quick flip put action vs manual input put dial
+tooltip_text := "github.com/dgnsrekt/tradingview-options-reticle" + "\n"
+tooltip_text := tooltip_text + "version: {{ version }}" + "\n"
+tooltip_text := tooltip_text + "processed date: {{ processed_date }}" + "\n"
+tooltip_text := tooltip_text + "tickers: {{ ticker_range }}"
 
 if show_indicator
     Label := label.new(label_x_position, label_y_position, _text, yloc=yloc.price, xloc=xloc.bar_time, style=label.style_none, textcolor=position_color, size=size.huge, tooltip=tooltip_text)
