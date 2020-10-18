@@ -13,16 +13,17 @@ MAX_BARS_BACK = 90
 
 def build_script(watchlist, version, processed_date):
 
-    ticker_range = watchlist.symbol_range
-
     head = environment.get_template("head.pine")
     head_section = head.render(
         title=TITLE,
         short_title=SHORT_TITLE,
-        ticker_range=ticker_range,
+        ticker_range=watchlist.symbol_range,
+        ticker_count=len(watchlist),
         max_bars_back=MAX_BARS_BACK,
         version=version,
         processed_date=processed_date,
+        download_timestamp=watchlist.meta_data.download_timestamp,
+        days=watchlist.meta_data.days,
     )
 
     variables = environment.get_template("variables.pine")
@@ -44,7 +45,11 @@ def build_script(watchlist, version, processed_date):
 
     label = environment.get_template("label.pine")
     label_section = label.render(
-        version=version, processed_date=processed_date, ticker_range=ticker_range
+        version=version,
+        processed_date=processed_date,
+        ticker_range=watchlist.symbol_range,
+        download_timestamp=watchlist.meta_data.download_timestamp,
+        days=watchlist.meta_data.days,
     )
 
     return (

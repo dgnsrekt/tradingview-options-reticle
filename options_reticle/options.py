@@ -7,21 +7,26 @@ from pprint import pprint
 
 from pydantic import BaseModel as Base
 from pydantic import Field
+from pydantic import validator
 
 import toml
 
 from more_itertools import chunked
-
-from datetime import date
+from pendulum.datetime import DateTime
+from pendulum.date import Date
 
 from pathlib import Path
 
 
 class OptionsData(Base):
     symbol: str
-    expiration_date: date
+    expiration_date: Date
     call_strike: Optional[float]
     put_strike: Optional[float]
+
+    @validator("symbol")
+    def clean_symbol(value):
+        return value.replace("^", "")
 
     @classmethod
     def from_options_page(cls, page):
@@ -74,9 +79,20 @@ class OptionsData(Base):
     def day(self):
         return self.expiration_date.day
 
+    def __lt__(self, other):
+        if other.__class__ is self.__class__:
+            return self.symbol < other.symbol
+        return None
+
+
+class MetaData(Base):
+    download_timestamp: int
+    days: int
+
 
 class OptionsWatchlist(Base):
     watchlist: List[OptionsData]
+    meta_data: MetaData
 
     def to_toml(self, location: Path):
         with open(location, mode="w") as file:
@@ -99,7 +115,13 @@ class OptionsWatchlist(Base):
         return len(self.watchlist)
 
     def chunked(self):
-        return [OptionsWatchlist(watchlist=chunk) for chunk in chunked(self.watchlist, 200)]
+        return [
+            OptionsWatchlist(watchlist=chunk, meta_data=self.meta_data)
+            for chunk in chunked(self.watchlist, 200)
+        ]
+
+    def sort(self):
+        self.watchlist = sorted(self.watchlist)
 
     @property
     def symbol_range(self):

@@ -25,6 +25,7 @@ info = {
     "onion_count": "How many TOR circuits to use when downloading with WHAOR mode.",
 }
 
+
 download_options = {
     "watchlist": typer.Option(
         ...,
@@ -56,16 +57,17 @@ def download(
     """Downloads options data based on a tradingview watchlist."""
 
     if mode == Mode.threaded:
-        downloader.threaded(watchlist, days, output, max_workers)
+        option_chains = downloader.threaded(watchlist, days, max_workers)
     elif mode == Mode.whaor:
-        downloader.whaor(watchlist, days, output, max_workers, onion_count)
+        option_chains = downloader.whaor(watchlist, days, max_workers, onion_count)
     else:
-        downloader.normal(watchlist, days, output)
+        option_chains = downloader.normal(watchlist, days)
+
+    downloader.finalize(option_chains, days, output)
 
 
-@app.command()
-def build(
-    input_path: Path = typer.Option(
+build_options = {
+    "options_data_input_path": typer.Option(
         ...,
         exists=True,
         file_okay=True,
@@ -73,17 +75,35 @@ def build(
         writable=False,
         readable=True,
         resolve_path=True,
-    ),
-):
+    )
+}
+
+
+@app.command()
+def build(options_data_input_path: Path = build_options["options_data_input_path"]):
     """Builds Options Reticle Scripts from options data."""
 
-    watchlist = OptionsWatchlist.from_toml(input_path)
+    watchlist = OptionsWatchlist.from_toml(options_data_input_path)
+    watchlist.sort()
     processed_date = pendulum.now(tz="utc")
-    output_path = input_path.parent
+    output_path = options_data_input_path.parent
+    timestamp = watchlist.meta_data.download_timestamp
+    days = watchlist.meta_data.days
 
     for index, watchlist_chunk in enumerate(watchlist.chunked()):
+        filename = output_path / f"options_reticle_script_{timestamp}_{days}_{index}.pine"
+
         script = build_script(watchlist_chunk, __version__, processed_date)
-        filename = output_path / f"options_reticle_script_{index}.pine"
 
         with open(filename, mode="w") as file:
             file.write(script)
+
+        typer.echo(f"Version: {__version__}")
+        typer.echo(f"Processed Date: {processed_date}")
+        typer.echo(f"Symbol Count: {len(watchlist_chunk)}")
+        typer.echo(f"Symbols: {watchlist_chunk.symbol_range}")
+        typer.echo("META DATA")
+        typer.echo("=========")
+        typer.echo(watchlist.meta_data.json(indent=4))
+        typer.echo(f"Output: {filename}")
+        typer.echo()

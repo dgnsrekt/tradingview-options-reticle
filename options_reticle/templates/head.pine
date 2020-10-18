@@ -5,6 +5,9 @@
 //Version: {{ version }}
 //Processed Date: {{ processed_date }}
 //Tickers: {{ ticker_range }}
+//Count: {{ ticker_count }}
+//Download Timestamp: {{ download_timestamp }}
+//Days until expiration: {{ days }}
 //
 //                        .-._                                                   _,-,
 //                         `._`-._                                           _,-'_,'

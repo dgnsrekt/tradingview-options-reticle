@@ -1,16 +1,28 @@
 from .tradingview import TradingViewWatchlist
 from .paths import PROJECT_ROOT_PATH
-from .options import OptionsData, OptionsWatchlist
+from .options import OptionsData, OptionsWatchlist, MetaData
 
 from yfs import get_options_page
 import typer
+import pendulum
 
 from concurrent.futures import as_completed, ThreadPoolExecutor
 
 PROGRESSBAR_LABEL = "Downloading Options Data..."
 
 
-def normal(watchlist_location, days, output_location):
+def finalize(option_chains, days, output_location):
+
+    download_timestamp = pendulum.now(tz="UTC").int_timestamp
+
+    meta_data = MetaData(download_timestamp=download_timestamp, days=days)
+
+    options_watchlist = OptionsWatchlist(watchlist=option_chains, meta_data=meta_data)
+
+    options_watchlist.to_toml(output_location)
+
+
+def normal(watchlist_location, days):
 
     tradingview_watchlist = TradingViewWatchlist.from_file(watchlist_location)
 
@@ -25,15 +37,14 @@ def normal(watchlist_location, days, output_location):
 
                 if chain:
                     option_chains.append(OptionsData.from_options_page(chain))
+
             except Exception as exc:
                 print(exc)
 
-    options_watchlist = OptionsWatchlist(watchlist=option_chains)
-
-    options_watchlist.to_toml(output_location)
+    return option_chains
 
 
-def threaded(watchlist_location, days, output_location, max_workers):
+def threaded(watchlist_location, days, max_workers):
 
     tradingview_watchlist = TradingViewWatchlist.from_file(watchlist_location)
 
@@ -63,12 +74,10 @@ def threaded(watchlist_location, days, output_location, max_workers):
                 except Exception as exc:
                     print(exc)
 
-    options_watchlist = OptionsWatchlist(watchlist=option_chains)
-
-    options_watchlist.to_toml(output_location)
+    return option_chains
 
 
-def whaor(watchlist_location, days, output_location, max_workers, onion_count):
+def whaor(watchlist_location, days, max_workers, onion_count):
     from requests_whaor import RequestsWhaor
 
     tradingview_watchlist = TradingViewWatchlist.from_file(watchlist_location)
@@ -104,6 +113,4 @@ def whaor(watchlist_location, days, output_location, max_workers, onion_count):
                     except Exception as exc:
                         print(exc)
 
-    options_watchlist = OptionsWatchlist(watchlist=option_chains)
-
-    options_watchlist.to_toml(output_location)
+    return option_chains
