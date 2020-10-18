@@ -1,6 +1,6 @@
 # [FDD] **Options Reticle**
 
-![alt text](images/options_reticle_v3.png)
+![alt text](images/options_reticle_v4.png)
 
 ***Fomo Driven Development Options Series Reticle caters to traders and gamblers around the world reaching out for long distant expiration and just OTM strike placement.***
 
