@@ -1,4 +1,10 @@
+
 //@version=4
+//
+//Script Details
+//Version: {{ version }}
+//Processed Date: {{ processed_date }}
+//Tickers: {{ ticker_range }}
 //
 //                        .-._                                                   _,-,
 //                         `._`-._                                           _,-'_,'
@@ -23,6 +29,6 @@
 //
 
 TITLE = "{{ title }}"
-SHORT_TITLE = "{{ short_title }}"
+SHORT_TITLE = "{{ short_title }} {{ ticker_range }}"
 
-study(title=TITLE, shorttitle=SHORT_TITLE, overlay=true, max_bars_back={{ max_bars }})
+study(title=TITLE, shorttitle=SHORT_TITLE, overlay=true, max_bars_back={{ max_bars_back }})

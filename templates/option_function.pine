@@ -1,7 +1,0 @@
-option_data() =>
-    symbol = syminfo.ticker
-{% for ticker in watchlist %}
-{% if loop.index == 1 %}    if symbol == "{{ticker.symbol}}"{% else %}    else if symbol == "{{ticker.symbol}}"{% endif %}
-        {{ticker.return_data}}{% endfor %}
-    else
-        [na, na, na, 0.0, 0.0]

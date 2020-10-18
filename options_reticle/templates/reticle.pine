@@ -43,7 +43,7 @@ if show_indicator
 
     line.new(x1=bar_index[0], y1=strike_price, x2=bar_index[1], y2=strike_price, xloc=xloc.bar_index, extend=EXTEND_STYLE, style=LINE_STYLE, color=position_color)
 
-    low_dial=lowest(low, {{ length }})
-    high_dial=highest(high, {{ length }})
+    low_dial=lowest(low, {{ max_bars_back }})
+    high_dial=highest(high, {{ max_bars_back }})
 
     line.new(x1=expiration_date, y1=low_dial, x2=expiration_date, y2=high_dial, xloc=xloc.bar_time, extend=EXTEND_STYLE, style=LINE_STYLE, color=position_color)
