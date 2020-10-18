@@ -95,3 +95,6 @@ ENV/
 pytest.ini
 temp-plot.html
 watchlist.json
+
+option_data.toml
+options_reticle_script_*
