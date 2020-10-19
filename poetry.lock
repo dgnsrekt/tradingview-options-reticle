@@ -827,7 +827,7 @@ requests-html = ">=0.10.0,<0.11.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "78e2e31c0dc082bff88cade46b4c99a5270d3d7d3d559799d79e07f65fef1909"
+content-hash = "6570c3e6185a6fde181f440427c79ad77cc31ccd59b06316e9d3174724cac87d"
 
 [metadata.files]
 ansicon = [

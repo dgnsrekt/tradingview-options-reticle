@@ -26,7 +26,6 @@ jinja2 = "^2.11.2"
 pydantic = "^1.6.1"
 more-itertools = "^8.5.0"
 typer = {extras = ["all"], version = "^0.3.2"}
-loguru = "^0.5.2"
 yfs = "^0.3.1"
 requests-whaor = "^0.2.1"
 toml = "^0.10.1"
