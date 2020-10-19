@@ -1,3 +1,5 @@
+"""This module provides objects for creating and storing Options Watchlists."""
+
 from yfs import get_multiple_summary_pages
 from yfs import get_options_page
 

@@ -1,4 +1,4 @@
-"""Core module for the cli."""
+"""This module provides the command line interface functions."""
 
 from enum import Enum
 from pathlib import Path

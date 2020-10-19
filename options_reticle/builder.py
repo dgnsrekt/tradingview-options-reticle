@@ -1,4 +1,4 @@
-"""Used to build the Tradingview Script."""
+"""This module provides the functions to build the final Tradingview Script."""
 
 from jinja2 import Environment, FileSystemLoader
 from pendulum.datetime import DateTime

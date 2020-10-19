@@ -1,3 +1,5 @@
+"""This module provides classes and methods for working with exported Tradingview Watchlists."""
+
 from pydantic import BaseModel as Base
 from typing import Optional, List
 from pathlib import Path

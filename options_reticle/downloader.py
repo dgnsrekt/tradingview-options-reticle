@@ -1,3 +1,4 @@
+"""This module provides functions for downloading and creating options an watchlist."""
 from concurrent.futures import as_completed, ThreadPoolExecutor
 
 from .options import MetaData, OptionsData, OptionsWatchlist
