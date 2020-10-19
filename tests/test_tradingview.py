@@ -1,7 +1,7 @@
 import pytest
 
 from options_reticle.tradingview import TradingViewWatchlist
-from options_reticle.paths import PROJECT_ROOT_PATH
+from options_reticle.paths import TESTS_PATH
 
 
 WATCHLIST_STRING = (
@@ -23,7 +23,7 @@ BAD_WATCHLIST_STRING = (
 
 @pytest.fixture
 def watchlist_file_fixture():
-    watchlist_path = PROJECT_ROOT_PATH / "tests" / "test_data" / "test_watchlist.txt"
+    watchlist_path = TESTS_PATH / "test_data" / "test_watchlist.txt"
 
     assert watchlist_path.exists()
 
@@ -32,7 +32,7 @@ def watchlist_file_fixture():
 
 @pytest.fixture
 def bad_watchlist_file_fixture():
-    watchlist_path = PROJECT_ROOT_PATH / "tests" / "test_data" / "bad_test_watchlist.txt"
+    watchlist_path = TESTS_PATH / "test_data" / "bad_test_watchlist.txt"
 
     assert not watchlist_path.exists()
 

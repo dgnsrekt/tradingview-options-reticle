@@ -2,7 +2,7 @@ import pytest
 import pendulum
 
 from options_reticle.options import OptionsWatchlist
-from options_reticle.paths import PROJECT_ROOT_PATH
+from options_reticle.paths import TESTS_PATH
 from options_reticle.builder import build_script
 
 from pytest_regressions import data_regression  # noqa: F401
@@ -10,7 +10,7 @@ from pytest_regressions import data_regression  # noqa: F401
 
 @pytest.fixture
 def options_data_fixture():
-    watchlist_path = PROJECT_ROOT_PATH / "tests" / "test_data" / "test_option_data.toml"
+    watchlist_path = TESTS_PATH / "test_data" / "test_option_data.toml"
 
     assert watchlist_path.exists()
 

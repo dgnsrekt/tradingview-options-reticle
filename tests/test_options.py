@@ -2,14 +2,14 @@ import pytest
 import pickle
 
 from options_reticle.options import OptionsWatchlist, OptionsData
-from options_reticle.paths import PROJECT_ROOT_PATH
+from options_reticle.paths import TESTS_PATH
 
 from pytest_regressions import data_regression  # noqa: F401
 
 
 @pytest.fixture
 def options_data_fixture():
-    watchlist_path = PROJECT_ROOT_PATH / "tests" / "test_data" / "test_option_data.toml"
+    watchlist_path = TESTS_PATH / "test_data" / "test_option_data.toml"
     assert watchlist_path.exists()
 
     watchlist = OptionsWatchlist.from_toml(watchlist_path)
@@ -20,9 +20,7 @@ def options_data_fixture():
 
 @pytest.fixture
 def options_page_pickle_fixture():
-    options_chain_data_path = (
-        PROJECT_ROOT_PATH / "tests" / "test_data" / "appl_options_chain_data.pickle"
-    )
+    options_chain_data_path = TESTS_PATH / "test_data" / "appl_options_chain_data.pickle"
     assert options_chain_data_path.exists()
 
     with open(options_chain_data_path, mode="rb") as file:
