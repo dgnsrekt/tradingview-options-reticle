@@ -23,6 +23,7 @@ class TradingViewWatchlist(Base):
     def from_str(cls, contents: str):
         try:
             contents = [TradingViewTicker.from_str(ticker) for ticker in contents.split(",")]
+
         except ValueError:
             msg = "Make sure the watchlist is properly formatted."
             raise ValueError(msg)

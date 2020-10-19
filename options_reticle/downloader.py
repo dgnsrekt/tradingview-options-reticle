@@ -1,12 +1,13 @@
-from .tradingview import TradingViewWatchlist
-from .paths import PROJECT_ROOT_PATH
-from .options import OptionsData, OptionsWatchlist, MetaData
+from concurrent.futures import as_completed, ThreadPoolExecutor
 
-from yfs import get_options_page
+from .options import MetaData, OptionsData, OptionsWatchlist
+from .paths import PROJECT_ROOT_PATH
+from .tradingview import TradingViewWatchlist
+
 import typer
 import pendulum
+from yfs import get_options_page
 
-from concurrent.futures import as_completed, ThreadPoolExecutor
 
 PROGRESSBAR_LABEL = "Downloading Options Data..."
 

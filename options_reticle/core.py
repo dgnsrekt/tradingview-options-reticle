@@ -1,16 +1,22 @@
-import typer
-from pathlib import Path
+"""Core module for the cli."""
+
 from enum import Enum
-from . import downloader, __version__
-from .options import OptionsWatchlist
-from .builder import build_script
+from pathlib import Path
+
 import pendulum
+import typer
+
+from . import __version__, downloader
+from .builder import build_script
+from .options import OptionsWatchlist
 
 
 app = typer.Typer()
 
 
 class Mode(str, Enum):
+    """Enum for different download type."""
+
     normal = "normal"
     threaded = "threaded"
     whaor = "whaor"
@@ -46,16 +52,15 @@ download_options = {
 
 
 @app.command()
-def download(
+def download(  # pylint: disable=too-many-arguments
     watchlist: Path = download_options["watchlist"],
     days: int = download_options["days"],
     output: Path = download_options["output"],
     mode: Mode = download_options["mode"],
     max_workers: int = download_options["max_workers"],
     onion_count: int = download_options["onion_count"],
-):
-    """Downloads options data based on a tradingview watchlist."""
-
+) -> None:
+    """Download Options Data."""
     if mode == Mode.threaded:
         option_chains = downloader.threaded(watchlist, days, max_workers)
     elif mode == Mode.whaor:
@@ -80,9 +85,8 @@ build_options = {
 
 
 @app.command()
-def build(options_data_input_path: Path = build_options["options_data_input_path"]):
-    """Builds Options Reticle Scripts from options data."""
-
+def build(options_data_input_path: Path = build_options["options_data_input_path"]) -> None:
+    """Build Options Reticle Scripts."""
     watchlist = OptionsWatchlist.from_toml(options_data_input_path)
     watchlist.sort()
     processed_date = pendulum.now(tz="utc")

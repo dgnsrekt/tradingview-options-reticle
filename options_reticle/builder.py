@@ -1,4 +1,8 @@
+"""Used to build the Tradingview Script."""
+
 from jinja2 import Environment, FileSystemLoader
+from pendulum.datetime import DateTime
+
 from .emoji import create_emojis
 from .options import OptionsWatchlist
 from .paths import TEMPLATES_PATH
@@ -11,8 +15,10 @@ SHORT_TITLE = "[FDD] OPTIONS RETICLE"
 MAX_BARS_BACK = 90
 
 
-def build_script(watchlist, version, processed_date):
-
+def build_script(  # pylint: disable=too-many-locals
+    watchlist: OptionsWatchlist, version: str, processed_date: DateTime
+) -> str:
+    """Process the final Tradingview Options Reticle script."""
     head = environment.get_template("head.pine")
     head_section = head.render(
         title=TITLE,
