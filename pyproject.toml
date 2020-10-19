@@ -9,12 +9,7 @@ homepage = "https://github.com/dgnsrekt/tradingview-options-reticle"
 repository = "https://github.com/dgnsrekt/tradingview-options-reticle"
 documentation = "https://github.com/dgnsrekt/tradingview-options-reticle"
 keywords = ["tradingview", "options-trading", "python"]
-packages = [
-    { include = "options_reticle" },
-    { include = "tests", format = "sdist" },
-]
-include = ["images"]
-exclude = ["concepts"]
+include = ["images", ".flake8", "noxfile.py", "poetry.lock", "tests"]
 
 [tool.poetry.scripts]
 options-reticle = "options_reticle.core:app"
