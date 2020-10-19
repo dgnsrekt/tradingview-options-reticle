@@ -27,14 +27,16 @@ $ pipx install options-reticle
 
 
 ## OVERLAY FEATURES:
-* Quick Action PUT (QAP) Mode - When you flip the chart by adding a 0- in front of the symbol, you will see the PUT contract target.
-* Strike Price / Expiration Crosshairs.
-* Fill Mode - Shows a fill between the historical price and the target strike price. It will show green when ITM and red when OTM.
-* Target information panel shows the company name, days till expiration, month and day of expiration, strike price, dollars OTM or ITM, and the contract type.
-* Emotion Indicator - Shows an exact representation of your feelings based on if you were in the trade. It has an accuracy of 99.9 percent.
+* `Quick Action PUT (QAP) Mode` - When you flip the chart by adding a 0- in front of the symbol, you will see the PUT contract target.
+* `Strike Price / Expiration Crosshairs`.
+* `Fill Mode` - Shows a fill between the historical price and the target strike price. It will show green when ITM and red when OTM.
+* `Target information panel` - Shows the company name, days till expiration, month and day of expiration, strike price, dollars OTM or ITM, and the contract type.
+* `Emotion Indicator` - Shows an exact representation of your feelings based on if you were in the trade. It has an accuracy of 99.9 percent.
 
 ## QUICK ACTION PUT (QAP) MODE:
-This style of reticle is not visual until you flip the chart. The advantage of the (QAP) is that it maintains the same appearance as the standard style of reticle, making PUT contract targeting feel the same. When targeting with (QAP) mode, be aware that the chart prices are reversed. Up is down, and down is up; this can be confusing but will feel normal overtime. Activate QAP mode by appending a 0- to the symbol of the chart. If nothing appears, no put option data was found for that symbol.
+This style of reticle is not visible until you flip the chart. The advantage of the (QAP) is that it maintains the same appearance as the standard style of reticle, making PUT contract targeting feel the same. When targeting with (QAP) mode, be aware that the chart prices are reversed. Up is down, and down is up; this can be confusing but will feel normal overtime. Activate QAP mode by appending a `0-` to the symbol of the chart. If nothing appears, no put option data was found for that symbol.
+
+[![alt text](https://www.tradingview.com/x/z9Uqdo2h/)](https://www.tradingview.com/x/z9Uqdo2h/)
 
 ## CALIBRATING YOUR RETICLE
 The overlay is generated using the options-reticle CLI tool found on GitHub. The adjustment script will parse a watchlist exported from TradingView then download options data for each ticker in the watchlist. The max amount of symbols you can add to a single overlay is about 200. Any more than 200 and the overlay will crash. Luckily, If you use a TradingView watchlist with more than 200 ticker symbols to generate overlays, the options-reticle command-line tool will automatically create multiple overlays with 200 tickers each. You can add multiple overlays to your chart to get all the tickers in the watchlist.
@@ -52,3 +54,13 @@ The overlay is generated using the options-reticle CLI tool found on GitHub. The
 * Give the choice to generate PUT option contracts without using QAP mode. This option will allow you to use the input settings to change the contract type without flipping the chart.
 * Max OTM target argument - This will allow the option-reticle CLI to generate overlays with deeper OTM contracts. It currently only searches for the first OTM contract.
 * Add the ability to change the crosshair line type. [dash, dotted, solid]
+
+## TODO
+* [ ] More Testing.
+* [ ] More Features.
+* [ ] More Docs.
+
+## Contact Information
+Telegram = Twitter = Tradingview = Discord = @dgnsrekt
+
+Email = dgnsrekt@pm.me
