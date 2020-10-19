@@ -1,19 +1,29 @@
-# [FDD] **Options Reticle**
 
 ![alt text](images/options_reticle_v4.png)
 
-***FOMO Driven Development Options Series Reticle caters to degenerate traders and gamblers worldwide, reaching out for long distant expiration and just OTM strike placement.***
+<!-- # [FDD] **Options Reticle** -->
+# ***[FDD] Options Reticle caters to degenerate traders and gamblers worldwide, reaching out for long distant contract expiration and just OTM strike placement.***
 
-**Congratulations on your choice of Options Reticle.**
+## 🍾🍾**Congratulations on your choice of Options Reticle.**🎉🎉
 
-The Options Reticle provides a targeting system overlay that will show a horizontal OTM strike price and verticle expiration target. If you're thinking as soon as the expiration date has passed, this overlay will be useless; you're right but, you can use the options-reticle CLI tool to generate a new overlay from a watchlist exported from TradingView.
+### The Options Reticle provides a targeting system overlay that will show a horizontal OTM strike price and verticle expiration target. If you're thinking as soon as the expiration date has passed, this overlay will be useless; you're right but, you can use the options-reticle CLI tool to generate a new overlay from a watchlist exported from TradingView.
+
+## Install with [pipx](https://github.com/pipxproject/pipx)
+
+```bash
+$ pipx install options-reticle
+```
 
 ![alt text](images/aapl_basic.gif)
-![alt text](images/aapl1r.png)
-![alt text](images/aapl2r.png)
-![alt text](images/aapl3r.png)
-![alt text](images/aapl4r.png)
-![alt text](images/aapl5r.png)
+
+[![alt text](https://www.tradingview.com/x/U95ddn6i/)](https://www.tradingview.com/x/U95ddn6i/)
+
+[![alt text](https://www.tradingview.com/x/bjJedDvF/)](https://www.tradingview.com/x/bjJedDvF/)
+
+[![alt text](https://www.tradingview.com/x/c1Md17a8/)](https://www.tradingview.com/x/c1Md17a8/)
+
+[![alt text](https://www.tradingview.com/x/cLFQzQFW/)](https://www.tradingview.com/x/cLFQzQFW/)
+
 
 ## OVERLAY FEATURES:
 * Quick Action PUT (QAP) Mode - When you flip the chart by adding a 0- in front of the symbol, you will see the PUT contract target.
@@ -38,6 +48,6 @@ The overlay is generated using the options-reticle CLI tool found on GitHub. The
 7. Copy and paste each of the generated overlay scripts one at a time into the Pine Editor on TradingView, then click the Add to Chart button. Make sure you copy the entire code.
 
 ## FUTURE FEATURES:
-Give the option to generate PUT option contracts without using QAP mode. This option will allow you to use the input settings to change the contract type without flipping the chart.
-Max OTM argument - This will allow the option-reticle CLI to generate overlays with deeper OTM options. It currently only searches for the first OTM contract.
-Add the ability to change the crosshair line type. [dash, dotted, solid]
+* Give the choice to generate PUT option contracts without using QAP mode. This option will allow you to use the input settings to change the contract type without flipping the chart.
+* Max OTM target argument - This will allow the option-reticle CLI to generate overlays with deeper OTM contracts. It currently only searches for the first OTM contract.
+* Add the ability to change the crosshair line type. [dash, dotted, solid]
