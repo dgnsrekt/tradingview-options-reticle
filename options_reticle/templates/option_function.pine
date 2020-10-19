@@ -2,7 +2,7 @@
 option_data() =>
     symbol = syminfo.ticker
 {% for ticker in watchlist %}
-{% if loop.index == 1 %}    if symbol == "{{ticker.symbol.replace('^', "")}}"{% else %}    else if symbol == "{{ticker.symbol.replace('^', "")}}"{% endif %}
-        [{{ticker.year}}, {{ticker.month}}, {{ticker.day}}, {{ticker.call_data}}, {{ticker.put_data}}] {% endfor %}
+{% if loop.index == 1 %}    if symbol == "{{ticker.symbol}}"{% else %}    else if symbol == "{{ticker.symbol}}"{% endif %}
+        [{{ticker.year}}, {{ticker.month}}, {{ticker.day}}, {{ticker.call_strike}}, {{ticker.put_strike}}] {% endfor %}
     else
         [na, na, na, 0.0, 0.0]

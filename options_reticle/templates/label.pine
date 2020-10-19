@@ -27,7 +27,7 @@ var tooltip_text = ""
 tooltip_text := "github.com/dgnsrekt/tradingview-options-reticle" + "\n"
 tooltip_text := tooltip_text + "version: {{ version }}" + "\n"
 tooltip_text := tooltip_text + "processed date: {{ processed_date }}" + "\n"
-tooltip_text := tooltip_text + "tickers: {{ ticker_range }}"
+tooltip_text := tooltip_text + "tickers: [{{ first_ticker }} -> {{ last_ticker }}]"
 
 if show_indicator
     Label := label.new(label_x_position, label_y_position, _text, yloc=yloc.price, xloc=xloc.bar_time, style=label.style_none, textcolor=position_color, size=size.huge, tooltip=tooltip_text)

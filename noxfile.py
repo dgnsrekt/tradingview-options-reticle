@@ -22,6 +22,7 @@ def cover(session):
 
 
 lint_files = [
+    "__init__.py",
     "builder.py",
     "core.py",
     "downloader.py",

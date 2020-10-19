@@ -8,7 +8,8 @@ import typer
 
 from . import __version__, downloader
 from .builder import build_script
-from .options import OptionsWatchlist
+from .options import MetaData, OptionsWatchlist
+from .tradingview import TradingViewWatchlist
 
 
 app = typer.Typer()
@@ -61,14 +62,22 @@ def download(  # pylint: disable=too-many-arguments
     onion_count: int = download_options["onion_count"],
 ) -> None:
     """Download Options Data."""
-    if mode == Mode.threaded:
-        option_chains = downloader.threaded(watchlist, days, max_workers)
-    elif mode == Mode.whaor:
-        option_chains = downloader.whaor(watchlist, days, max_workers, onion_count)
-    else:
-        option_chains = downloader.normal(watchlist, days)
+    tradingview_watchlist = TradingViewWatchlist.from_file(watchlist)
 
-    downloader.finalize(option_chains, days, output)
+    download_timestamp = pendulum.now(tz="UTC").int_timestamp
+
+    meta_data = MetaData(download_timestamp=download_timestamp, days=days)
+
+    if mode == Mode.threaded:
+        option_chains = downloader.threaded(tradingview_watchlist, days, max_workers)
+    elif mode == Mode.whaor:
+        option_chains = downloader.whaor(tradingview_watchlist, days, max_workers, onion_count)
+    else:
+        option_chains = downloader.normal(tradingview_watchlist, days)
+
+    options_watchlist = OptionsWatchlist(watchlist=option_chains, meta_data=meta_data)
+
+    options_watchlist.to_toml(output)
 
 
 build_options = {
@@ -89,9 +98,13 @@ def build(options_data_input_path: Path = build_options["options_data_input_path
     """Build Options Reticle Scripts."""
     watchlist = OptionsWatchlist.from_toml(options_data_input_path)
     watchlist.sort()
+
     processed_date = pendulum.now(tz="utc")
+
     output_path = options_data_input_path.parent
+
     timestamp = watchlist.meta_data.download_timestamp
+
     days = watchlist.meta_data.days
 
     for index, watchlist_chunk in enumerate(watchlist.chunked()):
@@ -105,7 +118,8 @@ def build(options_data_input_path: Path = build_options["options_data_input_path
         typer.echo(f"Version: {__version__}")
         typer.echo(f"Processed Date: {processed_date}")
         typer.echo(f"Symbol Count: {len(watchlist_chunk)}")
-        typer.echo(f"Symbols: {watchlist_chunk.symbol_range}")
+        typer.echo(f"Symbol Head: {watchlist_chunk.head}")
+        typer.echo(f"Symbol Tail: {watchlist_chunk.tail}")
         typer.echo("META DATA")
         typer.echo("=========")
         typer.echo(watchlist.meta_data.json(indent=4))

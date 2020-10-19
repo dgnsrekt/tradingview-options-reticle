@@ -31,8 +31,8 @@ def options_page_pickle_fixture():
 
 def test_option_data_created_from_option_object(options_page_pickle_fixture):
     option_data = OptionsData.from_options_page(options_page_pickle_fixture)
-    assert option_data.call_data == 120.0
-    assert option_data.put_data == 117.5
+    assert option_data.call_strike == 120.0
+    assert option_data.put_strike == 117.5
     assert option_data.year == 2021
     assert option_data.month == 1
     assert option_data.day == 15
@@ -43,7 +43,8 @@ def test_options_watchlist_created_from_file(options_data_fixture, data_regressi
 
 
 def test_options_watchlist_symbol_range(options_data_fixture, data_regression):
-    data_regression.check(options_data_fixture.symbol_range)
+    result = f"[{options_data_fixture.head} -> {options_data_fixture.tail}]"
+    data_regression.check(result)
 
 
 def test_options_watchlist_len(options_data_fixture, data_regression):

@@ -4,7 +4,7 @@
 //Script Details
 //Version: {{ version }}
 //Processed Date: {{ processed_date }}
-//Tickers: {{ ticker_range }}
+//Tickers: [{{ first_ticker }} -> {{ last_ticker }}]
 //Count: {{ ticker_count }}
 //Download Timestamp: {{ download_timestamp }}
 //Days until expiration: {{ days }}
@@ -32,6 +32,6 @@
 //
 
 TITLE = "{{ title }}"
-SHORT_TITLE = "{{ short_title }} {{ ticker_range }}"
+SHORT_TITLE = "{{ short_title }} [{{ first_ticker }} -> {{ last_ticker }}]"
 
 study(title=TITLE, shorttitle=SHORT_TITLE, overlay=true, max_bars_back={{ max_bars_back }})

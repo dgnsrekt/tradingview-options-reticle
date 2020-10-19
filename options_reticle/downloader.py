@@ -1,33 +1,27 @@
 """This module provides functions for downloading and creating options an watchlist."""
-from concurrent.futures import as_completed, ThreadPoolExecutor
 
-from .options import MetaData, OptionsData, OptionsWatchlist
-from .paths import PROJECT_ROOT_PATH
-from .tradingview import TradingViewWatchlist
+from concurrent.futures import as_completed, ThreadPoolExecutor
+from typing import List
 
 import typer
-import pendulum
 from yfs import get_options_page
+from yfs.options import OptionsChain
 
+from .options import OptionsData
+from .tradingview import TradingViewWatchlist
 
 PROGRESSBAR_LABEL = "Downloading Options Data..."
 
 
-def finalize(option_chains, days, output_location):
+def normal(tradingview_watchlist: TradingViewWatchlist, days: int) -> List[OptionsChain]:
+    """Download option data for each symbol in a TradingView watchlist.
 
-    download_timestamp = pendulum.now(tz="UTC").int_timestamp
+    This is the standard download method. This download method does not use thread or proxies.
 
-    meta_data = MetaData(download_timestamp=download_timestamp, days=days)
-
-    options_watchlist = OptionsWatchlist(watchlist=option_chains, meta_data=meta_data)
-
-    options_watchlist.to_toml(output_location)
-
-
-def normal(watchlist_location, days):
-
-    tradingview_watchlist = TradingViewWatchlist.from_file(watchlist_location)
-
+    Args:
+        tradingview_watchlist (TradingViewWatchlist): A watchlist exported from tradingview.
+        days (int): Minimum days left until expiration.
+    """
     option_chains = []
 
     with typer.progressbar(tradingview_watchlist, label=PROGRESSBAR_LABEL) as progress:
@@ -40,16 +34,25 @@ def normal(watchlist_location, days):
                 if chain:
                     option_chains.append(OptionsData.from_options_page(chain))
 
-            except Exception as exc:
-                print(exc)
+            except Exception as exc:  # pylint: disable=broad-except
+                typer.echo(exc)
 
     return option_chains
 
 
-def threaded(watchlist_location, days, max_workers):
+def threaded(
+    tradingview_watchlist: TradingViewWatchlist, days: int, max_workers: int
+) -> List[OptionsChain]:
+    """Download option data for each symbol in a TradingView watchlist.
 
-    tradingview_watchlist = TradingViewWatchlist.from_file(watchlist_location)
+    This download method will use threads to speed up the download process.
+    This method has a higher chance of hitting rate-limits.
 
+    Args:
+        tradingview_watchlist (TradingViewWatchlist): A watchlist exported from tradingview.
+        days (int): Minimum days left until expiration.
+        max_workers (int): Max thread count for the ThreadPoolExecutor to use.
+    """
     option_chains = []
 
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
@@ -73,16 +76,26 @@ def threaded(watchlist_location, days, max_workers):
                     if chain:
                         option_chains.append(OptionsData.from_options_page(chain))
 
-                except Exception as exc:
-                    print(exc)
+                except Exception as exc:  # pylint: disable=broad-except
+                    typer.echo(exc)
 
     return option_chains
 
 
-def whaor(watchlist_location, days, max_workers, onion_count):
-    from requests_whaor import RequestsWhaor
+def whaor(
+    tradingview_watchlist: TradingViewWatchlist, days: int, max_workers: int, onion_count: int
+) -> List[OptionsChain]:
+    """Download option data for each symbol in a TradingView watchlist.
 
-    tradingview_watchlist = TradingViewWatchlist.from_file(watchlist_location)
+    This download method will use threads to speed up the download process.
+    Additionally, this method will use requests_whaor to proxy each request to avoid rate-limits.
+
+    Args:
+        tradingview_watchlist (TradingViewWatchlist): A watchlist exported from tradingview.
+        days (int): Minimum days left until expiration.
+        max_workers (int): Max thread count for the ThreadPoolExecutor to use.
+    """
+    from requests_whaor import RequestsWhaor  # pylint: disable=import-outside-toplevel
 
     option_chains = []
 
@@ -112,7 +125,7 @@ def whaor(watchlist_location, days, max_workers, onion_count):
                         if chain:
                             option_chains.append(OptionsData.from_options_page(chain))
 
-                    except Exception as exc:
-                        print(exc)
+                    except Exception as exc:  # pylint: disable=broad-except
+                        typer.echo(exc)
 
     return option_chains

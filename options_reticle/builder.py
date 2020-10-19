@@ -23,7 +23,8 @@ def build_script(  # pylint: disable=too-many-locals
     head_section = head.render(
         title=TITLE,
         short_title=SHORT_TITLE,
-        ticker_range=watchlist.symbol_range,
+        first_ticker=watchlist.head,
+        last_ticker=watchlist.tail,
         ticker_count=len(watchlist),
         max_bars_back=MAX_BARS_BACK,
         version=version,
@@ -53,17 +54,18 @@ def build_script(  # pylint: disable=too-many-locals
     label_section = label.render(
         version=version,
         processed_date=processed_date,
-        ticker_range=watchlist.symbol_range,
+        first_ticker=watchlist.head,
+        last_ticker=watchlist.tail,
         download_timestamp=watchlist.meta_data.download_timestamp,
         days=watchlist.meta_data.days,
     )
 
     return (
         head_section
-        + variables_section
-        + option_function_section
-        + reticle_section
-        + fill_section
-        + emoji_section
-        + label_section
+        + variables_section  # noqa
+        + option_function_section  # noqa
+        + reticle_section  # noqa
+        + fill_section  # noqa
+        + emoji_section  # noqa
+        + label_section  # noqa
     )
