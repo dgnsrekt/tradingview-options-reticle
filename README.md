@@ -4,7 +4,7 @@
 <!-- # [FDD] **Options Reticle** -->
 # ***[FDD] Options Reticle caters to degenerate traders and gamblers worldwide, reaching out for long distant contract expiration and just OTM strike placement.***
 
-## 🍾🍾**Congratulations on your choice of Options Reticle.**🎉🎉
+## 🍾🍾 **Congratulations on your choice of Options Reticle.** 🎉🎉
 
 ### The Options Reticle provides a targeting system overlay that will show a horizontal OTM strike price and verticle expiration target. If you're thinking as soon as the expiration date has passed, this overlay will be useless; you're right but, you can use the options-reticle CLI tool to generate a new overlay from a watchlist exported from TradingView.
 
