@@ -6,7 +6,8 @@
 
 ## 🍾🍾 **Congratulations on your choice of Options Reticle.** 🎉🎉
 
-### The Options Reticle provides a targeting system overlay that will show a horizontal OTM strike price and verticle expiration target. If you're thinking as soon as the expiration date has passed, this overlay will be useless; you're right but, you can use the options-reticle CLI tool to generate a new overlay from a watchlist exported from TradingView.
+### The Options Reticle provides a targeting system overlay that will show a horizontal OTM strike price and verticle expiration target. If you're thinking as soon as the expiration date has passed, this overlay will be useless; you're right but, you can use the `options-reticle` CLI tool to generate a new overlay from a watchlist exported from TradingView.
+
 
 ## Install with [pipx](https://github.com/pipxproject/pipx)
 
@@ -43,7 +44,7 @@ The overlay is generated using the options-reticle CLI tool found on GitHub. The
 2. Export the watchlist into a txt file using TradingView's watchlist export list button.
 3. Open the terminal and change to the directory with the downloaded watchlist txt file.
 4. Install options-reticle command tool with pipx. pipx install tradingview-options-reticle.
-5.Run the command options-reticle download --watchlist {name of watchlist.txt file}. This will download the options data to an options_data.toml in the same directory as the watchlist txt file.
+5. Run the command options-reticle download --watchlist {name of watchlist.txt file}. This will download the options data to an options_data.toml in the same directory as the watchlist txt file.
 6. Run the command options-reticle build --options-data-input-path options_data.toml. This will generate the overlay scripts. If the watch list has more than 200 ticker symbols, it will generate a separate overlay script for every 200 ticker symbol chunk.
 7. Copy and paste each of the generated overlay scripts one at a time into the Pine Editor on TradingView, then click the Add to Chart button. Make sure you copy the entire code.
 
