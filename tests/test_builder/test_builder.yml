@@ -1,0 +1,104 @@
+"\n//@version=4\n//\n//Script Details\n//Version: 0.2.0\n//Processed Date: 2020-10-18T00:00:00+00:00\n\
+  //Tickers: [AAPL -> YRD]\n//Count: 13\n//Download Timestamp: 1603050769\n//Days\
+  \ until expiration: 60\n//\n//                        .-._                     \
+  \                              _,-,\n//                         `._`-._        \
+  \                                   _,-'_,'\n//                            `._ `-._\
+  \                                   _,-' _,'\n//                               `._\
+  \  `-._        __.-----.__        _,-'  _,'\n//                                \
+  \  `._   `$===\"\"\"           \"\"\"===$'   _,'\n//                           \
+  \          `._/)  ._               _.  (\\_,'\n//                              \
+  \        )*'     **.__     __.**     '*(\n//                                   \
+  \   $  .==..__  \"\"   \"\"  __..==,  $\n//                                    \
+  \  $   `\"._(_).       .(_)_.\"'   $\n// /$$$$$$$$ /$$$$$$  /$$      /$$  /$$$$$$\
+  \        /$$$$$$$  /$$$$$$$  /$$$$$$ /$$    /$$ /$$$$$$$$ /$$   /$$\n//| $$_____//$$__\
+  \  $$| $$$    /$$$ /$$__  $$      | $$__  $$| $$__  $$|_  $$_/| $$   | $$| $$_____/|\
+  \ $$$ | $$\n//| $$     | $$  \\ $$| $$$$  /$$$$| $$  \\ $$      | $$  \\ $$| $$\
+  \  \\ $$  | $$  | $$   | $$| $$      | $$$$| $$\n//| $$$$$  | $$  | $$| $$ $$/$$\
+  \ $$| $$  | $$      | $$  | $$| $$$$$$$/  | $$  |  $$ / $$/| $$$$$   | $$ $$ $$\n\
+  //| $$__/  | $$  | $$| $$  $$$| $$| $$  | $$      | $$  | $$| $$__  $$  | $$   \\\
+  \  $$ $$/ | $$__/   | $$  $$$$\n//| $$     | $$  | $$| $$\\  $ | $$| $$  | $$  \
+  \    | $$  | $$| $$  \\ $$  | $$    \\  $$$/  | $$      | $$\\  $$$\n//| $$    \
+  \ |  $$$$$$/| $$ \\/  | $$|  $$$$$$/      | $$$$$$$/| $$  | $$ /$$$$$$   \\  $/\
+  \   | $$$$$$$$| $$ \\  $$\n//|__/      \\______/ |__/     |__/ \\______/       |_______/\
+  \ |__/  |__/|______/    \\_/    |________/|__/  \\__/\n//\n//FOMO DRIVEN DEVELOPMENT\
+  \ [Filter > Entry > Exit > Timing > Survial]\n//DGNSREKT (2020)\n//\n\nTITLE = \"\
+  FOMO DRIVEN DEVELOPMENT OPTIONS RETICLE\"\nSHORT_TITLE = \"[FDD] OPTIONS RETICLE\
+  \ [AAPL -> YRD]\"\n\nstudy(title=TITLE, shorttitle=SHORT_TITLE, overlay=true, max_bars_back=90)\n\
+  \nvar float strike_price = na\nvar bool show_indicator = na\nvar has_options = false\n\
+  \nshow_fill = input(title=\"Show fill\", type=input.bool, defval=false)\ninfo_offset\
+  \ = input(title=\"Info offset\", type=input.integer, defval=50)\n\n// may move show_fill\
+  \ to fill section\nvar chart_flipped = close[0] != abs(close[0]) //will be a conditional\
+  \ which adds this\n\noption_data() =>\n    symbol = syminfo.ticker\n\n    if symbol\
+  \ == \"AAPL\"\n        [2020, 12, 18, 120.0, 117.5] \n    else if symbol == \"AVAV\"\
+  \n        [2020, 12, 18, 75.0, 75.0] \n    else if symbol == \"FMCI\"\n        [2021,\
+  \ 1, 15, 25.0, 22.5] \n    else if symbol == \"GDX\"\n        [2020, 12, 18, 40.0,\
+  \ 39.0] \n    else if symbol == \"GLD\"\n        [2020, 12, 18, 179.0, 178.0] \n\
+  \    else if symbol == \"INO\"\n        [2021, 2, 19, 12.0, 11.0] \n    else if\
+  \ symbol == \"LZB\"\n        [2020, 12, 18, 40.0, 35.0] \n    else if symbol ==\
+  \ \"PDCO\"\n        [2020, 12, 18, 28.0, 26.0] \n    else if symbol == \"QD\"\n\
+  \        [2021, 1, 15, 1.5, 1.0] \n    else if symbol == \"WGO\"\n        [2021,\
+  \ 1, 15, 60.0, 55.0] \n    else if symbol == \"WORK\"\n        [2020, 12, 18, 35.0,\
+  \ 32.0] \n    else if symbol == \"WTI\"\n        [2021, 1, 15, 2.0, 1.0] \n    else\
+  \ if symbol == \"YRD\"\n        [2021, 2, 19, 5.0, 2.5] \n    else\n        [na,\
+  \ na, na, 0.0, 0.0]\n\n[_year, _month, _day, call_price, put_price] = option_data()\n\
+  \nexpiration_date = timestamp(_year, _month, _day, 0, 0, 0)\n\ncheck_options(call,\
+  \ put) =>\n    if call > 0\n        true\n    else if put > 0\n        true\n  \
+  \  else\n        false\n\n\nget_strike_price(call, put) =>\n    if chart_flipped\
+  \ == false\n        call\n    else if chart_flipped == true\n        put\n    else\n\
+  \        na\n\nhas_options := check_options(call_price, put_price)\n\nif (has_options\
+  \ == true)\n    strike_price := get_strike_price(call_price, put_price)\n\nif (strike_price\
+  \ > 0)\n    show_indicator := true\n\nif chart_flipped\n    strike_price := -strike_price\n\
+  \n\nabove_strike = close[0] > strike_price\nbelow_strike = close[0] < strike_price\n\
+  \nposition_color = above_strike ? color.new(color.green, 0) : color.new(color.red,\
+  \ 0)\n\nif show_indicator\n    LINE_STYLE = line.style_dashed\n    EXTEND_STYLE\
+  \ = extend.both\n\n    line.new(x1=bar_index[0], y1=strike_price, x2=bar_index[1],\
+  \ y2=strike_price, xloc=xloc.bar_index, extend=EXTEND_STYLE, style=LINE_STYLE, color=position_color)\n\
+  \n    low_dial=lowest(low, 90)\n    high_dial=highest(high, 90)\n\n    line.new(x1=expiration_date,\
+  \ y1=low_dial, x2=expiration_date, y2=high_dial, xloc=xloc.bar_time, extend=EXTEND_STYLE,\
+  \ style=LINE_STYLE, color=position_color)\n\nstrike_plot = plot(strike_price, color=below_strike\
+  \ and show_indicator and show_fill ? color.new(color.red, 100) : color.new(color.green,\
+  \ 100), editable=false, display=display.none)\nclose_plot = plot(close, color=below_strike\
+  \ and show_indicator and show_fill ? color.new(color.red, 100) : color.new(color.green,\
+  \ 100), editable=false, display=display.none)\nfill(strike_plot, close_plot, color\
+  \ = below_strike and show_indicator and show_fill ? color.red: show_indicator and\
+  \ show_fill ? color.green : na, editable=false)\n\nget_itm_emoji(dollars)=>\n  \
+  \  if dollars < 0.5\n        \"\U0001F642\"\n    else if dollars <= 1\n        \"\
+  \U0001F600\"\n    else if dollars <= 2\n        \"\U0001F603\"\n    else if dollars\
+  \ <= 3\n        \"\U0001F604\"\n    else if dollars <= 4\n        \"\U0001F601\"\
+  \n    else if dollars <= 5\n        \"\U0001F606\"\n    else if dollars <= 6\n \
+  \       \"\U0001F970\"\n    else if dollars <= 7\n        \"\U0001F60D\"\n    else\
+  \ if dollars <= 8\n        \"\U0001F929\"\n    else if dollars <= 9\n        \"\U0001F61B\
+  \"\n    else if dollars <= 10\n        \"\U0001F61C\"\n    else if dollars <= 11\n\
+  \        \"\U0001F911\"\n    else if dollars <= 12\n        \"\U0001F60E\"\n   \
+  \ else if dollars <= 13\n        \"\U0001F525\"\n    else if dollars <= 14\n   \
+  \     \"\U0001F389\"\n    else if dollars <= 15\n        \"\U0001F37E\"\n    else\
+  \ if dollars <= 16\n        \"\U0001F4AF\"\n    else\n        \"\U0001F4AF\"\n\n\
+  get_otm_emoji(dollars)=>\n    if dollars < 0.5\n        \"\U0001F610\"\n    else\
+  \ if dollars <= 1\n        \"\U0001F614\"\n    else if dollars <= 2\n        \"\U0001F612\
+  \"\n    else if dollars <= 3\n        \"\U0001F61E\"\n    else if dollars <= 4\n\
+  \        \"\U0001F61F\"\n    else if dollars <= 5\n        \"\U0001F641\"\n    else\
+  \ if dollars <= 6\n        \"\U0001F62E\"\n    else if dollars <= 7\n        \"\U0001F97A\
+  \"\n    else if dollars <= 8\n        \"\U0001F633\"\n    else if dollars <= 9\n\
+  \        \"\U0001F922\"\n    else if dollars <= 10\n        \"\U0001F92E\"\n   \
+  \ else if dollars <= 11\n        \"\U0001F635\"\n    else if dollars <= 12\n   \
+  \     \"\U0001F62D\"\n    else if dollars <= 13\n        \"\U0001F620\"\n    else\
+  \ if dollars <= 14\n        \"\U0001F92C\"\n    else if dollars <= 15\n        \"\
+  \U0001F480\"\n    else if dollars <= 16\n        \"\U0001F4A9\"\n    else\n    \
+  \    \"\U0001F4A9\"\n\nvar label Label = na\n\nDAY_IN_MILLISECONDS = 86400000\n\n\
+  days_til_expiration = round((expiration_date - time) / DAY_IN_MILLISECONDS)\n\n\
+  label.delete(Label)\n\nlabel_x_position = expiration_date + round(change(time) *\
+  \ info_offset)\nlabel_y_position = strike_price\n\ndollars_itm = above_strike ?\
+  \ close - strike_price : strike_price - close\n\nemoji = above_strike ? get_itm_emoji(dollars_itm)\
+  \ : get_otm_emoji(dollars_itm)\n\nvar _text = \"\"\n\n_text := syminfo.description\
+  \ + \"\\n\"\n_text := _text + tostring(days_til_expiration) + \" DAYS TIL \"\n_text\
+  \ := _text + tostring(_month) + \"/\" + tostring(_day) + \" EXPIRATION\"+ \"\\n\"\
+  \n_text := _text + \"STRIKE PRICE: $\" + tostring(abs(strike_price)) + \"\\n\"\n\
+  _text := _text + emoji + \" \" + (above_strike? \"$\" + tostring(dollars_itm) +\
+  \ \" IN THE MONEY\": \"$\" + tostring(dollars_itm) + \" OUT OF THE MONEY\") + \"\
+  \ \" + emoji + \"\\n\"\n_text := _text + (chart_flipped ? \" PUT OPTION \" : \"\
+  \ CALL OPTION \")\n\nvar tooltip_text = \"\"\ntooltip_text := \"github.com/dgnsrekt/tradingview-options-reticle\"\
+  \ + \"\\n\"\ntooltip_text := tooltip_text + \"version: 0.2.0\" + \"\\n\"\ntooltip_text\
+  \ := tooltip_text + \"processed date: 2020-10-18T00:00:00+00:00\" + \"\\n\"\ntooltip_text\
+  \ := tooltip_text + \"tickers: [AAPL -> YRD]\"\n\nif show_indicator\n    Label :=\
+  \ label.new(label_x_position, label_y_position, _text, yloc=yloc.price, xloc=xloc.bar_time,\
+  \ style=label.style_none, textcolor=position_color, size=size.huge, tooltip=tooltip_text)\n"

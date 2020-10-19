@@ -1,0 +1,81 @@
+[[watchlist]]
+symbol = "AAPL"
+expiration_date = 2020-12-18
+call_strike = "120.0"
+put_strike = "117.5"
+
+[[watchlist]]
+symbol = "AVAV"
+expiration_date = 2020-12-18
+call_strike = "75.0"
+put_strike = "75.0"
+
+[[watchlist]]
+symbol = "FMCI"
+expiration_date = 2021-01-15
+call_strike = "25.0"
+put_strike = "22.5"
+
+[[watchlist]]
+symbol = "GDX"
+expiration_date = 2020-12-18
+call_strike = "40.0"
+put_strike = "39.0"
+
+[[watchlist]]
+symbol = "GLD"
+expiration_date = 2020-12-18
+call_strike = "179.0"
+put_strike = "178.0"
+
+[[watchlist]]
+symbol = "INO"
+expiration_date = 2021-02-19
+call_strike = "12.0"
+put_strike = "11.0"
+
+[[watchlist]]
+symbol = "LZB"
+expiration_date = 2020-12-18
+call_strike = "40.0"
+put_strike = "35.0"
+
+[[watchlist]]
+symbol = "PDCO"
+expiration_date = 2020-12-18
+call_strike = "28.0"
+put_strike = "26.0"
+
+[[watchlist]]
+symbol = "QD"
+expiration_date = 2021-01-15
+call_strike = "1.5"
+put_strike = "1.0"
+
+[[watchlist]]
+symbol = "WGO"
+expiration_date = 2021-01-15
+call_strike = "60.0"
+put_strike = "55.0"
+
+[[watchlist]]
+symbol = "WORK"
+expiration_date = 2020-12-18
+call_strike = "35.0"
+put_strike = "32.0"
+
+[[watchlist]]
+symbol = "WTI"
+expiration_date = 2021-01-15
+call_strike = "2.0"
+put_strike = "1.0"
+
+[[watchlist]]
+symbol = "YRD"
+expiration_date = 2021-02-19
+call_strike = "5.0"
+put_strike = "2.5"
+
+[meta_data]
+download_timestamp = 1603050769
+days = 60

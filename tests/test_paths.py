@@ -1,7 +1,7 @@
-import tomlkit
+import toml
 
-import options_reticle
 from options_reticle.paths import PROJECT_ROOT_PATH, SOURCE_ROOT_PATH
+from options_reticle import __version__
 
 
 def test_sanity():
@@ -9,9 +9,10 @@ def test_sanity():
     assert pyproject_path.exists()
 
     with open(pyproject_path, mode="r") as file:
-        content = tomlkit.parse(file.read())
+        content = toml.loads(file.read())
 
     assert content["tool"]["poetry"].get("version") is not None
+    assert content["tool"]["poetry"].get("version") == __version__
 
 
 def test_sanity_two():
