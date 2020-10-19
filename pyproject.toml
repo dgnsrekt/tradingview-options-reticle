@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "options-reticle"
-version = "0.2.0"
+version = "0.3.0"
 description = "Generate OTM strike targets from tradingview watchlists."
 license = "MIT"
 authors = ["dgnsrekt <dgnsrekt@pm.me>"]
