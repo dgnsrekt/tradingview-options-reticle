@@ -14,7 +14,7 @@
 ```bash
 $ pipx install options-reticle
 ```
-### >>[WATCH THE SCRIPT RUN](https://asciinema.org/a/366342)<<
+### [>> WATCH THE SCRIPT RUN HERE <<](https://asciinema.org/a/366342)
 
 ![alt text](images/aapl_basic.gif)
 
