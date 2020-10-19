@@ -14,6 +14,7 @@
 ```bash
 $ pipx install options-reticle
 ```
+### >>[WATCH THE SCRIPT RUN](https://asciinema.org/a/366342)<<
 
 ![alt text](images/aapl_basic.gif)
 
@@ -49,6 +50,9 @@ The overlay is generated using the options-reticle CLI tool found on GitHub. The
 5. Run the command options-reticle download --watchlist {name of watchlist.txt file}. This will download the options data to an options_data.toml in the same directory as the watchlist txt file.
 6. Run the command options-reticle build --options-data-input-path options_data.toml. This will generate the overlay scripts. If the watch list has more than 200 ticker symbols, it will generate a separate overlay script for every 200 ticker symbol chunk.
 7. Copy and paste each of the generated overlay scripts one at a time into the Pine Editor on TradingView, then click the Add to Chart button. Make sure you copy the entire code.
+
+### EXAMPLE OF RETICLE GENERATION
+[![asciicast](https://asciinema.org/a/366342.png)](https://asciinema.org/a/366342)
 
 ## FUTURE FEATURES:
 * Give the choice to generate PUT option contracts without using QAP mode. This option will allow you to use the input settings to change the contract type without flipping the chart.
