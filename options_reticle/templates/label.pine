@@ -24,7 +24,7 @@ _text := _text + emoji + " " + (above_strike? "$" + tostring(dollars_itm) + " IN
 _text := _text + (chart_flipped ? " PUT OPTION " : " CALL OPTION ")
 
 var tooltip_text = ""
-tooltip_text := "github.com/dgnsrekt/tradingview-options-reticle" + "\n"
+tooltip_text := "Script Information:" + "\n"
 tooltip_text := tooltip_text + "version: {{ version }}" + "\n"
 tooltip_text := tooltip_text + "processed date: {{ processed_date }}" + "\n"
 tooltip_text := tooltip_text + "tickers: [{{ first_ticker }} -> {{ last_ticker }}]"

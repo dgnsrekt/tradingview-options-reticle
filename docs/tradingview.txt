@@ -1,7 +1,6 @@
 [b][FDD] Options Reticle caters to degenerate traders and gamblers worldwide, reaching out for long distant contract expiration and just OTM strike placement.[/b]
 
-Link to the script to generate the overlay your self.
-[url=https://github.com/dgnsrekt/tradingview-options-reticle]https://github.com/dgnsrekt/tradingview-options-reticle[/url]
+Generate the overlay yourself using the tradingview-options-reticle CLI tool found on github.
 
 The Options Reticle provides a targeting system overlay that will show a horizontal OTM strike price and verticle expiration target. If you're thinking as soon as the expiration date has passed, this overlay will be useless; you're right but, you can use the options-reticle CLI tool to generate a new overlay from a watchlist exported from TradingView.
 
@@ -50,6 +49,3 @@ The overlay is generated using the options-reticle CLI tool found on GitHub. The
 [*]Max OTM target argument - This will allow the option-reticle CLI to generate overlays with deeper OTM contracts. It currently only searches for the first OTM contract.
 [*]Add the ability to change the crosshair line type. [dash, dotted, solid]
 [/list]
-
-[b]Contact Information[/b]
-Telegram = Twitter = Tradingview = Discord = @dgnsrekt
