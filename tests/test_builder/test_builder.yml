@@ -96,7 +96,7 @@
   _text := _text + emoji + \" \" + (above_strike? \"$\" + tostring(dollars_itm) +\
   \ \" IN THE MONEY\": \"$\" + tostring(dollars_itm) + \" OUT OF THE MONEY\") + \"\
   \ \" + emoji + \"\\n\"\n_text := _text + (chart_flipped ? \" PUT OPTION \" : \"\
-  \ CALL OPTION \")\n\nvar tooltip_text = \"\"\ntooltip_text := \"github.com/dgnsrekt/tradingview-options-reticle\"\
+  \ CALL OPTION \")\n\nvar tooltip_text = \"\"\ntooltip_text := \"Script Information:\"\
   \ + \"\\n\"\ntooltip_text := tooltip_text + \"version: 0.2.0\" + \"\\n\"\ntooltip_text\
   \ := tooltip_text + \"processed date: 2020-10-18T00:00:00+00:00\" + \"\\n\"\ntooltip_text\
   \ := tooltip_text + \"tickers: [AAPL -> YRD]\"\n\nif show_indicator\n    Label :=\
